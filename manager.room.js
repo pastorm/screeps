@@ -11,6 +11,9 @@ let roomManager = {
         populationManager.run()
         roleManager.run(room)
         towerManager.tick(room)
+        // if (riche) {
+        // roadManager.tick(room)
+        // }
     }
 }
 
