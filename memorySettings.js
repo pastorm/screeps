@@ -1,7 +1,7 @@
-var memorySettings = {
+let memorySettings = {
     run: function () {
         // Suppression de la mémoire des screeps defunts
-        for(var i in Memory.creeps) {
+        for(let i in Memory.creeps) {
             if(!Game.creeps[i]) {
                 delete Memory.creeps[i];
             }
