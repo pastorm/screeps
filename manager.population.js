@@ -12,6 +12,6 @@ let populationManager = {
             }
         }
     }
-};
+}
 
-module.exports = populationManager;
+module.exports = populationManager

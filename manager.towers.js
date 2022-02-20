@@ -10,17 +10,17 @@ let towerManager = {
 
             let closestDamagedStructure = tower.pos.findClosestByRange(FIND_STRUCTURES, {
                 filter: (structure) => structure.hits < structure.hitsMax
-            });
+            })
             if(closestDamagedStructure) {
-                tower.repair(closestDamagedStructure);
+                tower.repair(closestDamagedStructure)
             }
 
-            let closestHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
+            let closestHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS)
             if(closestHostile) {
-                tower.attack(closestHostile);
+                tower.attack(closestHostile)
             }
         }
     }
-};
+}
 
-module.exports = towerManager;
+module.exports = towerManager

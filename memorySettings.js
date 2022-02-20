@@ -3,7 +3,7 @@ let memorySettings = {
         // Suppression de la mémoire des screeps defunts
         for(let i in Memory.creeps) {
             if(!Game.creeps[i]) {
-                delete Memory.creeps[i];
+                delete Memory.creeps[i]
             }
         }
 
@@ -20,7 +20,7 @@ let memorySettings = {
 
         for (let sourceIndex in sources) {
             let source = sources[sourceIndex]
-            memory.sources[source.id] = source;
+            memory.sources[source.id] = source
         }
 
         console.log("Init memory for room "+room.name+" with " + JSON.stringify(memory))

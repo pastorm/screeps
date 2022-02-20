@@ -1,7 +1,7 @@
-let memorySettings = require("memorySettings");
-let populationManager = require('manager.population');
-let roleManager = require('manager.roles');
-let towerManager = require('manager.towers');
+let memorySettings = require("memorySettings")
+let populationManager = require('manager.population')
+let roleManager = require('manager.roles')
+let towerManager = require('manager.towers')
 
 let roomManager = {
     tick: function(room) {
@@ -12,6 +12,6 @@ let roomManager = {
         roleManager.run(room)
         towerManager.tick(room)
     }
-};
+}
 
-module.exports = roomManager;
+module.exports = roomManager
