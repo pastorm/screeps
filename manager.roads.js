@@ -1,7 +1,7 @@
 let roadManager = {
     tick: function(room) {
 
-        let spawns = root.find(FIND_MY_SPAWNS)
+        let spawns = room.find(FIND_MY_SPAWNS)
         let sources = room.find(FIND_SOURCES)
         let controllers = room.find(FIND_MY_STRUCTURES, {filter: { structureType: STRUCTURE_CONTROLLER } })
 
