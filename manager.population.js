@@ -4,40 +4,44 @@ const roleBuilder = require('role.builder')
 const roleUpgrader = require('role.upgrader')
 
 let populationManager = {
-    populations: {
-        harvester: {
+    populations: [
+        {
             role: roleHarvester,
-            number: 1,
+            maxNumber: 2,
         },
-        carrier: {
+        {
             role: roleCarrier,
-            number: 1,
+            maxNumber: 2,
         },
-        builder: {
+        {
             role: roleBuilder,
-            number: 4,
+            maxNumber: 1,
         },
-        upgrader: {
+        {
             role: roleUpgrader,
-            number: 1,
+            maxNumber: 2,
         },
-    },
+    ],
     
     /** @param {Room} room **/
     run: function(room) {
-        for (kind in this.populations) {
-            nbKind = _.filter(Game.creeps, (creep) => {return creep.memory.role === kind}).length
-            if (nbKind < this.populations[kind]) {
+        for (i in this.populations) {
+            let kind = this.populations[i]
+            let nbKind = _.filter(room.find(FIND_MY_CREEPS), (creep) => {return creep.memory.role === kind.role.label}).length
+            if (nbKind < kind.maxNumber) {
                 this.spawnCreepOfKind(room, kind)
             }
         }
     },
 
+    /** @param {Room} room **/
     spawnCreepOfKind: function(room, kind) {
-        const role = this.populations[kind].role
-        Game.spawns[0].spawnCreep(
+        const role = kind.role
+        let spawns = room.find(FIND_MY_SPAWNS)
+
+        spawns[0].spawnCreep(
             role.getCreepBodyPartsToSpawn(room),
-            kind + "-" + Game.time,
+            role.label + "-" + Game.time,
             {memory: {role: role.label}}
         )
     }

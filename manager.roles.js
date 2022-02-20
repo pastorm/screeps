@@ -10,19 +10,18 @@ let roleManager = {
         for(let name in owned_creeps) {
         
             let creep = owned_creeps[name]
-            if(creep.memory.role === roleHarvester.label) {
+            if (creep.memory.role === roleHarvester.label) {
                 roleHarvester.run(creep)
-                continue
-            }
-            if(creep.memory.role === roleCarrier.label) {
+            } 
+            else if (creep.memory.role === roleCarrier.label) {
                 roleCarrier.run(creep)
                 continue
-            }
-            if(creep.memory.role === roleUpgrader.label) {
+            } 
+            else if (creep.memory.role === roleUpgrader.label) {
                 roleUpgrader.run(creep)
                 continue
-            }
-            if(creep.memory.role === roleBuilder.label) {
+            } 
+            else if (creep.memory.role === roleBuilder.label) {
                 roleBuilder.run(creep)
                 continue
             }

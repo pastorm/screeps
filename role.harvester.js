@@ -27,7 +27,7 @@ let roleHarvester = {
             }
         }
         else {
-            creep.drop(RESOURCES_ALL)
+            creep.drop(RESOURCE_ENERGY)
         }
     }
 }

@@ -8,7 +8,7 @@ let roomManager = {
         // console.log("room tick: " + room.name)
 
         memoryManager.tick(room)
-        populationManager.run()
+        populationManager.run(room)
         roleManager.run(room)
         towerManager.tick(room)
         // if (riche) {

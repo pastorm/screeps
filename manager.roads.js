@@ -18,7 +18,7 @@ let roadManager = {
             for (let arrival_index = 0; arrival_index < arrivals.length; arrival_index++)
             {
                 let paths = room.findPath(departures[departures_index].pos, arrivals[arrival_index].pos, { ignoreCreeps: true, ignoreRoads: true })
-                // lenght-1 to avoid building road on arrival
+                // length-1 to avoid building road on arrival
                 for (let path_index = 0; path_index < paths.length - 1; path_index++) 
                 {
                     room.createConstructionSite(paths[path_index].x,paths[path_index].y, STRUCTURE_ROAD)

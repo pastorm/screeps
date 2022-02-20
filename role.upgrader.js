@@ -2,7 +2,7 @@ let roleUpgrader = {
     label: "upgrader",
 
     /** @param {Room} room **/
-    getCreepBodyPartsToSpawn: function () {
+    getCreepBodyPartsToSpawn: function (room) {
         return [WORK, CARRY, MOVE]
     },
 
