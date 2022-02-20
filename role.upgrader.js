@@ -10,7 +10,7 @@ let roleUpgrader = {
 
     /** @param {Creep} creep **/
     run: function(creep) {
-
+        // FIXME s'approche de la source, ensuite ya plus de place autour de la source donc il part a une autre, sans miner
         if (creep.memory.upgrading && creep.store[RESOURCE_ENERGY] === 0) {
             creep.memory.upgrading = false
             creep.say('🔄 harvest')

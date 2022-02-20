@@ -1,10 +1,7 @@
 let memoryManager = {
     tick: function (room) {
-
         let memory = room.memory
-        // if (memory.sources === undefined) {
-            this.initMemory(room, memory)
-        // }
+        this.initMemory(room, memory)
 
         this.updateFreeSlots(room, memory)
         // console.log("Tick memory for "+room.name+" with " + JSON.stringify(memory))

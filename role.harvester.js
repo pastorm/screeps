@@ -7,30 +7,36 @@ let roleHarvester = {
     getCreepBodyPartsToSpawn: function (room) {
         // TODO harvester simple s il n y en a pas
         // TODO carrier simple s'il n'y en a pas
-        let maxCapacity = room.energyCapacityAvailable
         let bodyParts = [WORK, CARRY, MOVE]
-        let nextPart = WORK
+        let maxCapacity = room.energyCapacityAvailable - 200
+        let nextPart = WORK // nextPart est toujours WORK ^^
         while (maxCapacity >= 0) {
-            if (maxCapacity - 50 < 0) {
+            if (maxCapacity - 100 >= 0) {
                 bodyParts.push(nextPart)
+                maxCapacity -= 100
             } else {
                 break
             }
-            // nextPart est toujours WORK ^^
         }
-
         return bodyParts
     },
 
     /** @param {Creep} creep **/
     run: function(creep) {
-        if (creep.store.getFreeCapacity() > 0) {
+        // FIXME harvest que en arrivant puis plus du tout
+        if (creep.memory.harvesting) {
+            creep.harvest(creep.memory.source)
+        } else {
             let source = tools.findClosestSource(creep.pos)
-            if(creep.harvest(source) === ERR_NOT_IN_RANGE) {
+            if (creep.harvest(source) === OK) {
+                creep.memory.harvesting = true
+                creep.memory.source = source
+            } else {
                 creep.moveTo(source, {visualizePathStyle: {stroke: '#ffaa00'}})
             }
-        }
-        else {
+        }        
+        
+        if (creep.store.getFreeCapacity() === 0) {
             creep.drop(RESOURCE_ENERGY)
         }
     }

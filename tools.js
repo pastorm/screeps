@@ -20,6 +20,7 @@ var findClosestSource = function(roomPosition) {
 
     // Filtre des sources avec de la place
     sources = sources.filter((source) => source.freeSlotCount > 0)
+    sources = sources.map((source) => source.source)
 
     if (sources.length === 0)
         return undefined
