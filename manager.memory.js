@@ -78,24 +78,6 @@ let memoryManager = {
         }
         // console.log('---')
     },
-
-    /** @param {RoomPosition} roomPosition **/
-    findClosestSource(roomPosition) {
-        let room = Game.rooms[roomPosition.roomName]
-        let memory = room.memory
-        let sources = memory.sources
-
-        // Filtre des sources avec de la place
-        sources = sources.filter((source) => source.freeSlotCount > 0)
-
-        if (sources.length === 0)
-            return undefined
-
-        // Choix de la source la plus proche
-        let closest = roomPosition.findClosestByPath(sources)
-
-        return closest
-    },
 }
 
 module.exports = memoryManager
