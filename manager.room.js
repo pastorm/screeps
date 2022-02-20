@@ -1,6 +1,7 @@
 let memorySettings = require("memorySettings");
 let populationManager = require('manager.population');
 let roleManager = require('manager.roles');
+let towerManager = require('manager.towers');
 
 let roomManager = {
     tick: function(room) {
@@ -9,6 +10,7 @@ let roomManager = {
         memorySettings.tick(room)
         populationManager.run()
         roleManager.run(room)
+        towerManager.tick(room)
     }
 };
 
