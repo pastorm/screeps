@@ -19,7 +19,7 @@ let populationManager = {
         },
         {
             role: roleUpgrader,
-            maxNumber: 2,
+            maxNumber: 4,
         },
     ],
     

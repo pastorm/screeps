@@ -1,8 +1,12 @@
+const tools = require("tools")
+
 let roleHarvester = {
     label: "harvester",
 
     /** @param {Room} room **/
     getCreepBodyPartsToSpawn: function (room) {
+        // TODO harvester simple s il n y en a pas
+        // TODO carrier simple s'il n'y en a pas
         let maxCapacity = room.energyCapacityAvailable
         let bodyParts = [WORK, CARRY, MOVE]
         let nextPart = WORK
@@ -21,9 +25,9 @@ let roleHarvester = {
     /** @param {Creep} creep **/
     run: function(creep) {
         if (creep.store.getFreeCapacity() > 0) {
-            let sources = creep.room.find(FIND_SOURCES)
-            if(creep.harvest(sources[0]) === ERR_NOT_IN_RANGE) {
-                creep.moveTo(sources[0], {visualizePathStyle: {stroke: '#ffaa00'}})
+            let source = tools.findClosestSource(creep.pos)
+            if(creep.harvest(source) === ERR_NOT_IN_RANGE) {
+                creep.moveTo(source, {visualizePathStyle: {stroke: '#ffaa00'}})
             }
         }
         else {
