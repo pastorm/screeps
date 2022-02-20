@@ -1,6 +1,7 @@
 let populationManager = {
     populations: {
         harvester: 1,
+        carrier: 1,
         builder: 4,
         upgrader: 1,
     },

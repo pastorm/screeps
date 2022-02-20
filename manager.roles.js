@@ -1,4 +1,5 @@
 roleHarvester = require('role.harvester')
+roleCarrier = require('role.carrier')
 roleBuilder = require('role.builder')
 roleUpgrader = require('role.upgrader')
 
@@ -11,16 +12,19 @@ let roleManager = {
             let creep = owned_creeps[name]
             if(creep.memory.role === 'harvester') {
                 roleHarvester.run(creep)
-                break
+                continue
             }
-            if(creep.memory.role === 'harvester') {
+            if(creep.memory.role === 'carrier') {
                 roleHarvester.run(creep)
+                continue
             }
             if(creep.memory.role === 'upgrader') {
                 roleUpgrader.run(creep)
+                continue
             }
             if(creep.memory.role === 'builder') {
                 roleBuilder.run(creep)
+                continue
             }
         }      
     }
