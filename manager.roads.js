@@ -5,15 +5,16 @@ let roadManager = {
         let sources = room.find(FIND_SOURCES)
         let controllers = room.find(FIND_MY_STRUCTURES, {filter: { structureType: STRUCTURE_CONTROLLER } })
 
-        buildRoad(spawns, sources)
-        buildRoad(spawns, controllers)
-        buildRoad(sources, controllers)
+        this.buildRoad(room, spawns, sources)
+        this.buildRoad(room, spawns, controllers)
+        this.buildRoad(room, sources, controllers)
     },
 
+    /** @param {Room} room **/
     /** @param {Array} departures **/
     /** @param {Array} arrivals **/
-    buildRoad: function(departures, arrivals) {
-        for (let departures_index = 0; departures_index < departuress.length; departures_index++) {
+    buildRoad: function(room, departures, arrivals) {
+        for (let departures_index = 0; departures_index < departures.length; departures_index++) {
             for (let arrival_index = 0; arrival_index < arrivals.length; arrival_index++)
             {
                 let paths = room.findPath(departures[departures_index].pos, arrivals[arrival_index].pos, { ignoreCreeps: true, ignoreRoads: true })
