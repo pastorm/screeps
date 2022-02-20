@@ -5,7 +5,6 @@ const towerManager = require('manager.towers')
 
 let roomManager = {
     tick: function(room) {
-        // console.log("room tick: " + room.name)
 
         memoryManager.tick(room)
         populationManager.run(room)

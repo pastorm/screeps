@@ -4,11 +4,12 @@ let memoryManager = {
         this.initMemory(room, memory)
 
         this.updateFreeSlots(room, memory)
-        // console.log("Tick memory for "+room.name+" with " + JSON.stringify(memory))
     },
 
-    /** @param {Room} room **/
-    /** @param {Memory} memory **/
+    /**
+     * @param {Room} room
+     * @param {Memory} memory
+     **/
     initMemory: function(room, memory) {
 
         memory.sources = []
@@ -26,8 +27,11 @@ let memoryManager = {
         }
     },
 
-    /** @param {Terrain} Terrain **/
-    /** @param {RoomPosition} roomPosition **/
+    /**
+     * @param {Terrain} terrain
+     * @param {RoomPosition} roomPosition
+     * @param {Room} room
+     **/
     findTerrainSlots: function(terrain, roomPosition, room) {
         let slots = []
 
@@ -42,8 +46,9 @@ let memoryManager = {
         return slots
     },
 
-    /** @param {Room} room **/
-    /** @param {Memory} memory **/
+    /** @param {Room} room
+     * @param {Memory} memory
+     **/
     updateFreeSlots: function(room, memory) {
         for (let sourceIndex in memory.sources) {
             let source = memory.sources[sourceIndex]
