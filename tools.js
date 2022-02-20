@@ -1,6 +1,6 @@
-let gatherEnergy = function () {
+let gatherEnergy = function (creep) {
     let targets = creep.room.find(FIND_STRUCTURES);
-    
+
     for (source in sources) {
         source = sources[source]
         
