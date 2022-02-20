@@ -1,4 +1,4 @@
-let memorySettings = require("memorySettings")
+let memoryManager = require("manager.memory")
 let populationManager = require('manager.population')
 let roleManager = require('manager.roles')
 let towerManager = require('manager.towers')
@@ -7,7 +7,7 @@ let roomManager = {
     tick: function(room) {
         // console.log("room tick: "+room.name)
 
-        memorySettings.tick(room)
+        memoryManager.tick(room)
         populationManager.run()
         roleManager.run(room)
         towerManager.tick(room)
