@@ -1,4 +1,22 @@
 let roleCarrier = {
+    label: "carrier",
+
+    /** @param {Room} room **/
+    getCreepBodyPartsToSpawn: function () {
+        let maxCapacity = room.energyCapacityAvailable
+        let bodyParts = [CARRY, MOVE]
+        let nextPart = CARRY
+        while (maxCapacity >= 0) {
+            if (maxCapacity - 50 < 0) {
+                bodyParts.push(nextPart)
+            } else {
+                break
+            }
+            nextPart = nextPart === CARRY ? MOVE : CARRY
+        }
+
+        return bodyParts
+    },
 
     /** @param {Creep} creep **/
     run: function(creep) {

@@ -1,4 +1,10 @@
 let roleUpgrader = {
+    label: "upgrader",
+
+    /** @param {Room} room **/
+    getCreepBodyPartsToSpawn: function () {
+        return [WORK, CARRY, MOVE]
+    },
 
     /** @param {Creep} creep **/
     run: function(creep) {

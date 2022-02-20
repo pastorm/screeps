@@ -1,7 +1,7 @@
-let memoryManager = require("manager.memory")
-let populationManager = require('manager.population')
-let roleManager = require('manager.roles')
-let towerManager = require('manager.towers')
+const memorySettings = require("memorySettings")
+const populationManager = require('manager.population')
+const roleManager = require('manager.roles')
+const towerManager = require('manager.towers')
 
 let roomManager = {
     tick: function(room) {

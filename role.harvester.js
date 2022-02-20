@@ -1,4 +1,22 @@
 let roleHarvester = {
+    label: "harvester",
+
+    /** @param {Room} room **/
+    getCreepBodyPartsToSpawn: function (room) {
+        let maxCapacity = room.energyCapacityAvailable
+        let bodyParts = [WORK, CARRY, MOVE]
+        let nextPart = WORK
+        while (maxCapacity >= 0) {
+            if (maxCapacity - 50 < 0) {
+                bodyParts.push(nextPart)
+            } else {
+                break
+            }
+            // nextPart est toujours WORK ^^
+        }
+
+        return bodyParts
+    },
 
     /** @param {Creep} creep **/
     run: function(creep) {
