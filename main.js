@@ -1,4 +1,4 @@
-let roomManager = require('manager.room')
+const roomManager = require('manager.room')
 
 module.exports.loop = function () {
 

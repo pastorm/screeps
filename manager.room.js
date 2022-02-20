@@ -1,4 +1,4 @@
-const memorySettings = require("memorySettings")
+const memoryManager = require('manager.memory')
 const populationManager = require('manager.population')
 const roleManager = require('manager.roles')
 const towerManager = require('manager.towers')
