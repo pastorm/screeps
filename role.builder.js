@@ -14,9 +14,23 @@ let roleBuilder = {
 
         if(creep.memory.building) {
             let targets = creep.room.find(FIND_CONSTRUCTION_SITES)
+            // Build
             if (targets.length) {
                 if (creep.build(targets[0]) === ERR_NOT_IN_RANGE) {
                     creep.moveTo(targets[0], {visualizePathStyle: {stroke: '#ffffff'}})
+                }
+            }
+            // Or repair
+            else {
+                let repair_targets = creep.room.find(FIND_STRUCTURES, {
+                    filter: object => object.hits < object.hitsMax
+                })
+                repair_targets.sort((a,b) => a.hits - b.hits)
+                
+                if (repair_targets.length > 0) {
+                    if(creep.repair(repair_targets[0]) === ERR_NOT_IN_RANGE) {
+                        creep.moveTo(repair_targets[0])
+                    }
                 }
             }
         }

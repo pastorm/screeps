@@ -11,10 +11,6 @@ let roleManager = {
             let creep = owned_creeps[name]
             if(creep.memory.role === 'harvester') {
                 roleHarvester.run(creep)
-                break
-            }
-            if(creep.memory.role === 'harvester') {
-                roleHarvester.run(creep)
             }
             if(creep.memory.role === 'upgrader') {
                 roleUpgrader.run(creep)

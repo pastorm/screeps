@@ -13,17 +13,7 @@ let roleUpgrader = {
         }
 
         if (creep.memory.upgrading) {
-            let repair_targets = creep.room.find(FIND_STRUCTURES, {
-                filter: object => object.hits < object.hitsMax
-            })
-            repair_targets.sort((a,b) => a.hits - b.hits)
-            
-            if (repair_targets.length > 0) {
-                if(creep.repair(repair_targets[0]) === ERR_NOT_IN_RANGE) {
-                    creep.moveTo(repair_targets[0])
-                }
-            }
-            else if (creep.upgradeController(creep.room.controller) === ERR_NOT_IN_RANGE) {
+            if (creep.upgradeController(creep.room.controller) === ERR_NOT_IN_RANGE) {
                 creep.moveTo(creep.room.controller, {visualizePathStyle: {stroke: '#ffffff'}})
             }
         }
