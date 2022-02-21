@@ -26,7 +26,7 @@ let roleHarvester = {
         if (creep.memory.harvesting == true) {
             creep.harvest(Game.getObjectById(creep.memory.source_id))
         } else {
-            let source = tools.findClosestSource(creep.pos)
+            let source = tools.findClosestSource(creep)
             if (creep.harvest(source) === OK) {
                 creep.memory.harvesting = true
                 creep.memory.source_id = source.id

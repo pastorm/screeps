@@ -12,23 +12,28 @@ let gatherEnergy = function (creep) {
     }
 }
 
-/** @param {RoomPosition} roomPosition **/
-var findClosestSource = function(roomPosition) {
-    let room = Game.rooms[roomPosition.roomName]
+/** @param {Creep} creep **/
+var findClosestSource = function(creep) {
+    let room = creep.room
     let memory = room.memory
-    let sources = memory.sources
+    let memory_sources = memory.sources
 
-    // Filtre des sources avec de la place
-    sources = sources.filter((source) => source.freeSlotCount > 0)
-    sources = sources.map((source) => source.source)
-
-    if (sources.length === 0)
+    if (memory_sources.length === 0) {
         return undefined
-
+    }
+    
+    // On chope les sources
+    let all_sources = memory_sources.map((source) => source.source)
+    
     // Choix de la source la plus proche
-    let closest = roomPosition.findClosestByPath(sources)
-
-    return closest
+    let closest = creep.pos.findClosestByPath(all_sources)
+    if (closest.pos.isNearTo(creep)) {
+        return closest
+    } else {
+        // Filtre des sources avec de la place
+        let available_sources = memory_sources.filter((source) => source.freeSlotCount > 0).map((source) => source.source)
+        return creep.pos.findClosestByPath(available_sources)
+    }
 }
 
 module.exports = {
