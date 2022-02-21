@@ -24,7 +24,7 @@ let roleCarrier = {
             for (let i in additionalParts) {
                 let part = additionalParts[i]
 
-                if (energy > bodyParts[part]) {
+                if (energy >= bodyParts[part]) {
                     energy -= bodyParts[part]
                     parts.push(part)
                     any = true

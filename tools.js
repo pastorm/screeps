@@ -16,22 +16,22 @@ let gatherEnergy = function (creep) {
 var findClosestSource = function(creep) {
     let room = creep.room
     let memory = room.memory
-    let memory_sources = memory.sources
+    let memorySources = memory.sources
 
-    if (memory_sources.length === 0) {
+    if (memorySources.length === 0) {
         return undefined
     }
     
     // On chope les sources
-    let all_sources = memory_sources.map((source) => source.source)
+    let allSources = memorySources.map((source) => source.source)
     
     // Choix de la source la plus proche
-    let closest = creep.pos.findClosestByPath(all_sources)
-    if (closest.pos.isNearTo(creep)) {
+    let closest = creep.pos.findClosestByPath(allSources)
+    if (closest && closest.pos.isNearTo(creep)) {
         return closest
     } else {
         // Filtre des sources avec de la place
-        let available_sources = memory_sources.filter((source) => source.freeSlotCount > 0).map((source) => source.source)
+        let available_sources = memorySources.filter((source) => source.freeSlotCount > 0).map((source) => source.source)
         return creep.pos.findClosestByPath(available_sources)
     }
 }

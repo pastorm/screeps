@@ -12,7 +12,7 @@ let roleUpgrader = {
      */
     getCreepBodyPartsToSpawn: function (room, energy) {
         const baseParts = [WORK, CARRY, MOVE]
-        const additionalParts = [CARRY, MOVE, WORK, CARRY, MOVE]
+        const additionalParts = [CARRY, MOVE, WORK]
         let parts = []
 
         for (let i in baseParts) {
@@ -26,7 +26,7 @@ let roleUpgrader = {
             for (let i in additionalParts) {
                 let part = additionalParts[i]
 
-                if (energy > bodyParts[part]) {
+                if (energy >= bodyParts[part]) {
                     energy -= bodyParts[part]
                     parts.push(part)
                     any = true
