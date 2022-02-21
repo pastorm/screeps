@@ -23,14 +23,13 @@ let roleHarvester = {
 
     /** @param {Creep} creep **/
     run: function(creep) {
-        // FIXME harvest que en arrivant puis plus du tout
-        if (creep.memory.harvesting) {
-            creep.harvest(creep.memory.source)
+        if (creep.memory.harvesting == true) {
+            creep.harvest(Game.getObjectById(creep.memory.source_id))
         } else {
             let source = tools.findClosestSource(creep.pos)
             if (creep.harvest(source) === OK) {
                 creep.memory.harvesting = true
-                creep.memory.source = source
+                creep.memory.source_id = source.id
             } else {
                 creep.moveTo(source, {visualizePathStyle: {stroke: '#ffaa00'}})
             }
