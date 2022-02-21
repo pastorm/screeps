@@ -1,24 +1,45 @@
 const tools = require("tools")
+const bodyParts = require("constants.bodyParts")
+const {add} = require("lodash");
 
 let roleHarvester = {
     label: "harvester",
 
-    /** @param {Room} room **/
-    getCreepBodyPartsToSpawn: function (room) {
-        // TODO harvester simple s il n y en a pas
-        // TODO carrier simple s'il n'y en a pas
-        let bodyParts = [WORK, CARRY, MOVE]
-        let maxCapacity = room.energyCapacityAvailable - 200
-        let nextPart = WORK // nextPart est toujours WORK ^^
-        while (maxCapacity >= 0) {
-            if (maxCapacity - 100 >= 0) {
-                bodyParts.push(nextPart)
-                maxCapacity -= 100
-            } else {
-                break
-            }
+    /**
+     *
+     * @param {Room} room
+     * @param energy
+     * @returns {("work"|"carry"|"move")[]}
+     */
+    getCreepBodyPartsToSpawn: function (room, energy) {
+
+        const baseParts = [WORK, CARRY, MOVE]
+        const additionalParts = [WORK, WORK, CARRY]
+        let parts = []
+
+        for (let i in baseParts) {
+            let part = baseParts[i]
+            energy -= bodyParts[part]
+            parts.push(part)
         }
-        return bodyParts
+
+        while (energy > 0) {
+            let any = false
+            for (let i in additionalParts) {
+                let part = additionalParts[i]
+
+                if (energy > bodyParts[part]) {
+                    energy -= bodyParts[part]
+                    parts.push(part)
+                    any = true
+                }
+            }
+
+            if (!any)
+                break
+
+        }
+        return parts
     },
 
     /** @param {Creep} creep **/

@@ -1,21 +1,41 @@
+const bodyParts = require("./constants.bodyParts");
 let roleCarrier = {
     label: "carrier",
 
-    /** @param {Room} room **/
-    getCreepBodyPartsToSpawn: function (room) {
-        let maxCapacity = room.energyCapacityAvailable
-        let bodyParts = [CARRY, MOVE]
-        let nextPart = CARRY
-        while (maxCapacity >= 0) {
-            if (maxCapacity - 50 < 0) {
-                bodyParts.push(nextPart)
-            } else {
-                break
-            }
-            nextPart = nextPart === CARRY ? MOVE : CARRY
+    /**
+     *
+     * @param {Room} room
+     * @param maxEnergy
+     * @returns {("work"|"carry"|"move")[]}
+     */
+    getCreepBodyPartsToSpawn: function (room, energy) {
+        const baseParts = [CARRY, MOVE]
+        const additionalParts = [CARRY]
+        let parts = []
+
+        for (let i in baseParts) {
+            let part = baseParts[i]
+            energy -= bodyParts[part]
+            parts.push(part)
         }
-        
-        return bodyParts
+
+        while (energy > 0) {
+            let any = false
+            for (let i in additionalParts) {
+                let part = additionalParts[i]
+
+                if (energy > bodyParts[part]) {
+                    energy -= bodyParts[part]
+                    parts.push(part)
+                    any = true
+                }
+            }
+
+            if (!any)
+                break
+
+        }
+        return parts
     },
     
     /** @param {Creep} creep **/

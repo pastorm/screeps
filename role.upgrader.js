@@ -3,8 +3,13 @@ const tools = require("tools")
 let roleUpgrader = {
     label: "upgrader",
 
-    /** @param {Room} room **/
-    getCreepBodyPartsToSpawn: function (room) {
+    /**
+     *
+     * @param {Room} room
+     * @param maxEnergy
+     * @returns {("work"|"carry"|"move")[]}
+     */
+    getCreepBodyPartsToSpawn: function (room, energy) {
         return [WORK, CARRY, MOVE]
     },
 
