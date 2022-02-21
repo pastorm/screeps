@@ -10,7 +10,7 @@ let roleCarrier = {
      */
     getCreepBodyPartsToSpawn: function (room, energy) {
         const baseParts = [CARRY, MOVE]
-        const additionalParts = [CARRY]
+        const additionalParts = [CARRY, MOVE]
         let parts = []
 
         for (let i in baseParts) {

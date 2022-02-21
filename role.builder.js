@@ -1,4 +1,5 @@
 const tools = require("tools")
+const bodyParts = require("./constants.bodyParts");
 
 let roleBuilder = {
     label: "builder",
@@ -10,7 +11,33 @@ let roleBuilder = {
      * @returns {("work"|"carry"|"move")[]}
      */
     getCreepBodyPartsToSpawn: function (room, energy) {
-        return [WORK, CARRY, MOVE]
+        const baseParts = [WORK, CARRY, MOVE]
+        const additionalParts = [CARRY, MOVE, WORK, CARRY, MOVE]
+        let parts = []
+
+        for (let i in baseParts) {
+            let part = baseParts[i]
+            energy -= bodyParts[part]
+            parts.push(part)
+        }
+
+        while (energy > 0) {
+            let any = false
+            for (let i in additionalParts) {
+                let part = additionalParts[i]
+
+                if (energy > bodyParts[part]) {
+                    energy -= bodyParts[part]
+                    parts.push(part)
+                    any = true
+                }
+            }
+
+            if (!any)
+                break
+
+        }
+        return parts
     },
 
     /** @param {Creep} creep **/

@@ -17,7 +17,7 @@ let populationManager = {
         },
         {
             role: roleBuilder,
-            maxNumber: 1,
+            maxNumber: 2,
             minNumber: 0,
         },
         {
@@ -46,7 +46,7 @@ let populationManager = {
         for (let i in populations) {
             let population = populations[i]
             if (population.required > 0) {
-                this.spawnCreep(room, population.role)
+                this.spawnCreep(room, population.role, true)
                 return
             }
         }
@@ -55,7 +55,7 @@ let populationManager = {
         for (let i in populations) {
             let population = populations[i]
             if (population.spaceLeft > 0) {
-                this.spawnCreep(room, population.role)
+                this.spawnCreep(room, population.role, false)
                 return
             }
         }
