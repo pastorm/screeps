@@ -42,7 +42,6 @@ let roleUpgrader = {
 
     /** @param {Creep} creep **/
     run: function(creep) {
-        // FIXME s'approche de la source, ensuite ya plus de place autour de la source donc il part a une autre, sans miner
         if (creep.memory.upgrading && creep.store[RESOURCE_ENERGY] === 0) {
             creep.memory.upgrading = false
             creep.say('🔄 harvest')
@@ -68,10 +67,7 @@ let roleUpgrader = {
             }
         }
         else {
-            let source = tools.findClosestSource(creep)
-            if(creep.harvest(source) === ERR_NOT_IN_RANGE) {
-                creep.moveTo(source, {visualizePathStyle: {stroke: '#ffaa00'}})
-            }
+            tools.gatherEnergy(creep)
         }
     }
 }

@@ -1,14 +1,35 @@
+/** @param {Creep} creep **/
 let gatherEnergy = function (creep) {
     // TODO s'approvisionner dans les structures/containers mais pas dans les mines
-    let targets = creep.room.find(FIND_STRUCTURES)
-
-    for (source in sources) {
-        source = sources[source]
-        
-    }
+    let containers = creep.room.find(FIND_STRUCTURES, {
+            filter: (structure) => { return structure.structureType === STRUCTURE_CONTAINER }
+        })
     
-    if (creep.harvest(sources[0]) === ERR_NOT_IN_RANGE) {
-        creep.moveTo(sources[0], {visualizePathStyle: {stroke: '#ffaa00'}})
+    if (containers.length) {
+        let not_empty_containers = _.filter(containers, (container) => container.store.getUsedCapacity(RESOURCE_ENERGY))
+        let closest = creep.pos.findClosestByPath(not_empty_containers)
+        
+        console.log(not_empty_containers.length)
+
+        if (creep.withdraw(closest, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
+            creep.moveTo(closest, {visualizePathStyle: {stroke: '#ffffff'}})
+        }
+
+    } else {
+        let backup_targets = creep.room.find(FIND_STRUCTURES, {
+            filter: (structure) => {
+                return (
+                    structure.structureType === STRUCTURE_EXTENSION
+                    || structure.structureType === STRUCTURE_SPAWN
+                ) 
+                && structure.store.getUsedCapacity(RESOURCE_ENERGY)
+            }
+        })
+        let closest = creep.pos.findClosestByPath(backup_targets)
+
+        if (creep.withdraw(closest, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
+            creep.moveTo(closest, {visualizePathStyle: {stroke: '#ffffff'}})
+        }
     }
 }
 
