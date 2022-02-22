@@ -40,19 +40,28 @@ let roleCarrier = {
     
     /** @param {Creep} creep **/
     run: function(creep) {
-        
+        // TODO Ramasser les tombstones
         let pickup_targets = creep.room.find(FIND_DROPPED_RESOURCES)
-        // pickup_targets + creep.room.find(FIND_TOMBSTONES)
+        let transfer_targets
         
-        let transfer_targets = creep.room.find(FIND_STRUCTURES, {
-            filter: (structure) => {
-                return (structure.structureType === STRUCTURE_EXTENSION ||
-                    structure.structureType === STRUCTURE_SPAWN ||
-                    structure.structureType === STRUCTURE_TOWER ||
-                    structure.structureType === STRUCTURE_CONTAINER) &&
-                    structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0
-            }
-        })
+        if (creep.room.energyCapacityAvailable != creep.room.energyAvailable) {
+            transfer_targets = creep.room.find(FIND_STRUCTURES, {
+                filter: (structure) => {
+                    return (structure.structureType === STRUCTURE_EXTENSION ||
+                        structure.structureType === STRUCTURE_SPAWN) &&
+                        structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0
+                }
+            })
+        } else {
+            transfer_targets = creep.room.find(FIND_STRUCTURES, {
+                filter: (structure) => {
+                    return (
+                        structure.structureType === STRUCTURE_TOWER ||
+                        structure.structureType === STRUCTURE_CONTAINER) &&
+                        structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0
+                }
+            })
+        }
         
         let pickup_target = pickup_targets.length ? pickup_targets[0] : null
         let transfer_target = transfer_targets.length ? transfer_targets[0] : null
